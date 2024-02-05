@@ -19,6 +19,8 @@ void parser::parse() {
             multiplyParser.parse(i);
         } else if (token == "divide") {
             divideParser.parse(i);
+        } else if (token == "exit") {
+            std::exit(0);
         }
     }
 }

@@ -1,13 +1,13 @@
 #include "interpreter.h"
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
-        return 1;
-    }
-
     interpreter interpreter;
-    interpreter.runFromFile(argv[1]);
+    
+    if (argc == 2) {
+        interpreter.runFromFile(argv[1]);
+    } else {
+        interpreter.runInteractiveMode();
+    }
 
     return 0;
 }

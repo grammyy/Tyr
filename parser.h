@@ -16,6 +16,8 @@ class parser {
     private:
         void parseVariableAssignment(size_t& index);
         void parsePrintStatement(size_t& index);
+        void parseExitStatement(size_t& index);
+        
         add addParser;
         subtract subtractParser;
         multiply multiplyParser;

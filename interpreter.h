@@ -22,6 +22,24 @@ class interpreter {
             }
         }
 
+        void runInteractiveMode() {
+            std::cout << "Týr 1.0  ->  Interpreted terminal\n";
+            std::cout << "Type 'exit' to quit\n";
+
+            std::string line;
+            while (true) {
+                std::cout << "> ";
+                std::getline(std::cin, line);
+
+                tokenize(line);
+
+                parser parser(tokens, variables);
+                parser.parse();
+
+                tokens.clear();
+            }
+        }
+
     private:
         std::vector<std::string> tokens;
         std::map<std::string, int> variables;
