@@ -17,8 +17,6 @@ class interpreter {
 
                 parser parser(tokens, variables);
                 parser.parse();
-
-                execute();
             } else {
                 std::cerr << "Error: Unable to open file " << filename << std::endl;
             }
@@ -34,12 +32,6 @@ class interpreter {
 
             while (iss >> token) {
                 tokens.push_back(token);
-            }
-        }
-
-        void execute() {
-            for (const auto& pair : variables) {
-                std::cout << pair.first << ": " << pair.second << std::endl;
             }
         }
 };

@@ -1,4 +1,5 @@
 #include "parser.h"
+#include <iostream>
 
 parser::parser(const std::vector<std::string>& tokens, std::map<std::string, int>& variables)
     : tokens(tokens), variables(variables), addParser(tokens, variables), subtractParser(tokens, variables),
@@ -32,5 +33,5 @@ void parser::parseVariableAssignment(size_t& index) {
 
 void parser::parsePrintStatement(size_t& index) {
     std::string varName = tokens[++index];
-    // Add code to handle printing or storing print statements
+    std::cout << varName << ": " << variables[varName] << std::endl;
 }
