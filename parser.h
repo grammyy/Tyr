@@ -4,6 +4,7 @@
 #include <string>
 #include "expressions/add.h"
 #include "expressions/subtract.h"
+#include "expressions/multiply.h"
 
 class parser {
     public:
@@ -16,6 +17,7 @@ class parser {
         void parsePrintStatement(size_t& index);
         add addParser;
         subtract subtractParser;
+        multiply multiplyParser;
 
         const std::vector<std::string>& tokens;
         std::map<std::string, int>& variables;
