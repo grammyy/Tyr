@@ -6,7 +6,7 @@ EXPRESSIONSDIR = expressions
 SRC = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(EXPRESSIONSDIR)/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 
-Norse: $(OBJ)
+Tyr: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 	del /Q $(SRCDIR)\*.o $(EXPRESSIONSDIR)\*.o
 
