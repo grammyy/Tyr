@@ -1,7 +1,8 @@
 #include "parser.h"
 
 parser::parser(const std::vector<std::string>& tokens, std::map<std::string, int>& variables)
-    : tokens(tokens), variables(variables), addParser(tokens, variables), subtractParser(tokens, variables), multiplyParser(tokens, variables) {}
+    : tokens(tokens), variables(variables), addParser(tokens, variables), subtractParser(tokens, variables),
+      multiplyParser(tokens, variables), divideParser(tokens, variables) {}
 
 void parser::parse() {
     for (size_t i = 0; i < tokens.size(); ++i) {
@@ -15,6 +16,8 @@ void parser::parse() {
             addParser.parse(i);
         } else if (token == "multiply") {
             multiplyParser.parse(i);
+        } else if (token == "divide") {
+            divideParser.parse(i);
         }
     }
 }
