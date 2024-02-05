@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <iostream>
 #include "expressions/add.h"
 #include "expressions/subtract.h"
 #include "expressions/multiply.h"
@@ -17,6 +18,8 @@ class parser {
         void parseVariableAssignment(size_t& index);
         void parsePrintStatement(size_t& index);
         void parseExitStatement(size_t& index);
+        void handleUnknownToken(const std::string& token);
+        void handleParsingError(const std::string& errorMessage);
         
         add addParser;
         subtract subtractParser;
@@ -26,3 +29,15 @@ class parser {
         const std::vector<std::string>& tokens;
         std::map<std::string, int>& variables;
 };
+
+void parser::parseExitStatement(size_t& index) {
+    std::exit(0);
+}
+
+void parser::handleUnknownToken(const std::string& token) {
+    std::cerr << "Error: Unknown token '" << token << "'" << std::endl;
+}
+
+void parser::handleParsingError(const std::string& errorMessage) {
+    std::cerr << "Parsing Error: " << errorMessage << std::endl;
+}

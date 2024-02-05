@@ -1,5 +1,6 @@
 #include "parser.h"
 #include <iostream>
+#include <stdexcept>
 
 parser::parser(const std::vector<std::string>& tokens, std::map<std::string, int>& variables)
     : tokens(tokens), variables(variables), addParser(tokens, variables), subtractParser(tokens, variables),
@@ -20,20 +21,42 @@ void parser::parse() {
         } else if (token == "divide") {
             divideParser.parse(i);
         } else if (token == "exit") {
-            std::exit(0);
+            parseExitStatement(i);
+        } else {
+            handleUnknownToken(token);
         }
     }
 }
 
 void parser::parseVariableAssignment(size_t& index) {
+    if (index + 2 >= tokens.size()) {
+        handleParsingError("Incomplete variable assignment");
+        return;
+    }
+
     std::string varName = tokens[++index];
-    
-    int value = std::stoi(tokens[++index]);
-    
-    variables[varName] = value;
+
+    try {
+        int value = std::stoi(tokens[++index]);
+        variables[varName] = value;
+    } catch (const std::invalid_argument& e) {
+        handleParsingError("Invalid value in variable assignment");
+    } catch (const std::out_of_range& e) {
+        handleParsingError("Value out of range in variable assignment");
+    }
 }
 
 void parser::parsePrintStatement(size_t& index) {
+    if (index + 1 >= tokens.size()) {
+        handleParsingError("Incomplete print statement");
+        return;
+    }
+
     std::string varName = tokens[++index];
-    std::cout << varName << ": " << variables[varName] << std::endl;
+    
+    if (variables.find(varName) != variables.end()) {
+        std::cout << varName << ": " << variables[varName] << std::endl;
+    } else {
+        handleParsingError("Variable not found in print statement");
+    }
 }
