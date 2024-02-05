@@ -1,17 +1,14 @@
 CC = g++
 CFLAGS = -static-libgcc -static-libstdc++
 
-SRC = Norse.cpp parser.cpp
+SRCDIR = .
+EXPRESSIONSDIR = expressions
+SRC = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(EXPRESSIONSDIR)/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 
 Norse: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
-	@echo Compiled $(SRC)
+	del /Q $(SRCDIR)\*.o $(EXPRESSIONSDIR)\*.o
 
 %.o: %.cpp
 	$(CC) -c -o $@ $<
-
-clean:
-	del -f Norse $(OBJ)
-
-.PHONY: all clean
