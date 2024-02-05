@@ -1,7 +1,7 @@
 #include "parser.h"
 
 parser::parser(const std::vector<std::string>& tokens, std::map<std::string, int>& variables)
-    : tokens(tokens), variables(variables), addParser(tokens, variables) {}
+    : tokens(tokens), variables(variables), addParser(tokens, variables), subtractParser(tokens, variables) {}
 
 void parser::parse() {
     for (size_t i = 0; i < tokens.size(); ++i) {
@@ -13,13 +13,17 @@ void parser::parse() {
             parsePrintStatement(i);
         } else if (token == "add") {
             addParser.parse(i);
-        } // Add more operations as needed
+        } else if (token == "subtract") {
+            subtractParser.parse(i); 
+        }
     }
 }
 
 void parser::parseVariableAssignment(size_t& index) {
     std::string varName = tokens[++index];
+    
     int value = std::stoi(tokens[++index]);
+    
     variables[varName] = value;
 }
 

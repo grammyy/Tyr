@@ -3,9 +3,9 @@
 #include <map>
 #include <string>
 
-class add {
+class subtract {
     public:
-        add(const std::vector<std::string>& tokens, std::map<std::string, int>& variables);
+        subtract(const std::vector<std::string>& tokens, std::map<std::string, int>& variables);
         
         void parse(size_t& index);
 
