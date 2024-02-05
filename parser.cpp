@@ -31,6 +31,7 @@ void parser::parse() {
 void parser::parseVariableAssignment(size_t& index) {
     if (index + 2 >= tokens.size()) {
         handleParsingError("Incomplete variable assignment");
+        
         return;
     }
 
@@ -49,6 +50,7 @@ void parser::parseVariableAssignment(size_t& index) {
 void parser::parsePrintStatement(size_t& index) {
     if (index + 1 >= tokens.size()) {
         handleParsingError("Incomplete print statement");
+
         return;
     }
 
@@ -59,4 +61,16 @@ void parser::parsePrintStatement(size_t& index) {
     } else {
         handleParsingError("Variable not found in print statement");
     }
+}
+
+void parser::parseExitStatement(size_t& index) {
+    std::exit(0);
+}
+
+void parser::handleUnknownToken(const std::string& token) {
+    std::cerr << "Error: Unknown token '" << token << "'" << std::endl;
+}
+
+void parser::handleParsingError(const std::string& errorMessage) {
+    std::cerr << "Parsing Error: " << errorMessage << std::endl;
 }

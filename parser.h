@@ -29,15 +29,3 @@ class parser {
         const std::vector<std::string>& tokens;
         std::map<std::string, int>& variables;
 };
-
-void parser::parseExitStatement(size_t& index) {
-    std::exit(0);
-}
-
-void parser::handleUnknownToken(const std::string& token) {
-    std::cerr << "Error: Unknown token '" << token << "'" << std::endl;
-}
-
-void parser::handleParsingError(const std::string& errorMessage) {
-    std::cerr << "Parsing Error: " << errorMessage << std::endl;
-}
